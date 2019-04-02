@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.prozprojekt.testingsystem.entities.User;
 import pl.prozprojekt.testingsystem.services.UserService;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -21,5 +22,20 @@ public class UserController {
     @GetMapping
     public Optional<User> getUserById(@RequestParam Long id){
         return userService.getUserById(id);
+    }
+
+    @GetMapping("/all")
+    public List<User> getAllUsers(){
+        return userService.getAllUsers();
+    }
+
+    @PostMapping
+    public void addUser(@RequestBody User user){
+        userService.addUser(user);
+    }
+
+    @DeleteMapping
+    public void deleteUserById(@RequestParam Long id){
+        userService.deleteUserById(id);
     }
 }
