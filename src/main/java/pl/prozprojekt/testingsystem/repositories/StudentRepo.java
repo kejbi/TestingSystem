@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import pl.prozprojekt.testingsystem.entities.User;
 
 @Repository
-public interface UserRepo extends JpaRepository<User, Long> {
+public interface StudentRepo extends JpaRepository<User, Long> {
 
 }

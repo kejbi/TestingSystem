@@ -3,39 +3,39 @@ package pl.prozprojekt.testingsystem.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.prozprojekt.testingsystem.entities.User;
-import pl.prozprojekt.testingsystem.services.UserService;
+import pl.prozprojekt.testingsystem.services.StudentService;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
-public class UserController {
+public class StudentController {
 
-    private UserService userService;
+    private StudentService studentService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
     @GetMapping
     public Optional<User> getUserById(@RequestParam Long id){
-        return userService.getUserById(id);
+        return studentService.getUserById(id);
     }
 
     @GetMapping("/all")
     public List<User> getAllUsers(){
-        return userService.getAllUsers();
+        return studentService.getAllUsers();
     }
 
     @PostMapping
     public void addUser(@RequestBody User user){
-        userService.addUser(user);
+        studentService.addUser(user);
     }
 
     @DeleteMapping
     public void deleteUserById(@RequestParam Long id){
-        userService.deleteUserById(id);
+        studentService.deleteUserById(id);
     }
 }
