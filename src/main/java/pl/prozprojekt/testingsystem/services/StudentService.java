@@ -2,6 +2,7 @@ package pl.prozprojekt.testingsystem.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.prozprojekt.testingsystem.entities.Student;
 import pl.prozprojekt.testingsystem.entities.User;
 import pl.prozprojekt.testingsystem.repositories.StudentRepo;
 
@@ -18,19 +19,19 @@ public class StudentService {
         this.studentRepo = studentRepo;
     }
 
-    public Optional<User> getUserById(Long id){
+    public Optional<Student> getStudentById(Long id){
         return studentRepo.findById(id);
     }
 
-    public List<User> getAllUsers(){
+    public List<Student> getAllStudents(){
         return studentRepo.findAll();
     }
 
-    public void addUser(User user){
-        studentRepo.save(user);
+    public void addStudent(Student student){
+        studentRepo.save(student);
     }
 
-    public void deleteUserById(Long id){
+    public void deleteStudentById(Long id){
         studentRepo.deleteById(id);
     }
 }
