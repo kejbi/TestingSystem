@@ -3,7 +3,7 @@ package pl.prozprojekt.testingsystem.entities;
 import javax.persistence.*;
 
 @MappedSuperclass
-public class User {
+public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
