@@ -8,19 +8,23 @@ import java.util.List;
 @Entity
 public class Teacher extends User {
 
-    public int getTests() {
-        return tests;
+    private int test; //put here so the entity wont be empty, almost certainly removed or changed but might be useful
+
+    private int difficulty; //difficulty of test, might be used later to pass to test generating function
+
+    public int getTest() {
+        return test;
     }
 
-    public void setTests(int tests) {
-        this.tests = tests;
+    public void setTest(int test) {
+        this.test = test;
     }
 
-    public int getRozwiazane() {
-        return rozwiazane;
+    public int getDifficulty() {
+        return difficulty;
     }
 
-    public void setRozwiazane(int rozwiazane) {
-        this.rozwiazane = rozwiazane;
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
     }
 }
