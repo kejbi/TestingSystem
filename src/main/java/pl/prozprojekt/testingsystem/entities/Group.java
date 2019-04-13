@@ -11,17 +11,17 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long teacherId;
+    private Teacher teacher;
 
-    private List<Student> students = new ArrayList<Student>();
+    private List<Student> students;
 
     public Long getId() { return id; }
 
     public void setId(Long id) { this.id = id; }
 
-    public Long getTeacherId() { return teacherId; }
+    public Teacher getTeacher() { return teacher; }
 
-    public void setTeacherId(Long teacherId) { this.teacherId = teacherId; }
+    public void setTeacher(Teacher teacher) { this.teacher = teacher; }
 
     public List<Student> getStudents() {
         return students;
