@@ -1,16 +1,19 @@
 package pl.prozprojekt.testingsystem.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@AttributeOverrides({
+        @AttributeOverride(name = "id", column =
+            @Column(name = "STUDENT_ID"))
+})
 public class Student extends User {
     //na razie do testow proste inty, potem będa to listy lub inne kolekcje
     private int tests;
 
     private int rozwiazane;
+
 
 
     public int getTests() {
