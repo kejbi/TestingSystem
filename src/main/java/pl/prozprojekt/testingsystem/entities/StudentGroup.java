@@ -11,8 +11,11 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    @Transient
     private Teacher teacher;
 
+    @Transient
     private List<Student> students;
 
     public Long getId() { return id; }
