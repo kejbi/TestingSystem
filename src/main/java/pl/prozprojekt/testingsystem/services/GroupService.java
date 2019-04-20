@@ -2,7 +2,7 @@ package pl.prozprojekt.testingsystem.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.prozprojekt.testingsystem.entities.Group;
+import pl.prozprojekt.testingsystem.entities.StudentGroup;
 import pl.prozprojekt.testingsystem.repositories.GroupRepo;
 
 
@@ -17,13 +17,13 @@ public class GroupService {
         this.groupRepo = groupRepo;
     }
 
-    public Optional<Group> getGroupById(Long id){ return groupRepo.findById(id); }
+    public Optional<StudentGroup> getGroupById(Long id){ return groupRepo.findById(id); }
 
-    public List<Group> getAllGroups(){
+    public List<StudentGroup> getAllGroups(){
         return groupRepo.findAll();
     }
 
-    public void addGroup(Group group){
+    public void addGroup(StudentGroup group){
         groupRepo.save(group);
     }
 

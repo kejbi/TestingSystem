@@ -3,7 +3,7 @@ package pl.prozprojekt.testingsystem.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import pl.prozprojekt.testingsystem.entities.Group;
+import pl.prozprojekt.testingsystem.entities.StudentGroup;
 import pl.prozprojekt.testingsystem.services.GroupService;
 
 import java.util.List;
@@ -20,17 +20,17 @@ public class GroupController {
     }
 
     @GetMapping
-    public Optional<Group> getGroupById(@RequestParam Long id){
+    public Optional<StudentGroup> getGroupById(@RequestParam Long id){
         return groupService.getGroupById(id);
     }
 
     @GetMapping("/all")
-    public List<Group> getAllGroups(){
+    public List<StudentGroup> getAllGroups(){
         return groupService.getAllGroups();
     }
 
     @PostMapping
-    public void addGroup(@RequestBody Group group){
+    public void addGroup(@RequestBody StudentGroup group){
         groupService.addGroup(group);
     }
 
