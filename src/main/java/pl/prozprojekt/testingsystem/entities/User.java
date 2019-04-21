@@ -10,10 +10,6 @@ public abstract class User {
 
     private String name;
 
-    private String login;
-
-    private Integer status;
-
     public Long getId() {
         return id;
     }
@@ -28,21 +24,5 @@ public abstract class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
     }
 }
