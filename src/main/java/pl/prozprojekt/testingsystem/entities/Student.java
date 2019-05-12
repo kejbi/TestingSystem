@@ -12,7 +12,6 @@ public class Student extends User {
 
     private int rozwiazane;
 
-
     public int getTests() {
         return tests;
     }
