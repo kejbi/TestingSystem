@@ -23,6 +23,10 @@ public class StudentService {
         return studentRepo.findById(id);
     }
 
+    public Optional<Student> getStudentByName(String name){
+        return studentRepo.findStudentByName(name);
+    }
+
     public List<Student> getAllStudents(){
         return studentRepo.findAll();
     }
