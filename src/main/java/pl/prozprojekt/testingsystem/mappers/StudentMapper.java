@@ -1,10 +1,10 @@
 package pl.prozprojekt.testingsystem.mappers;
 
-import org.springframework.stereotype.Component;
-import pl.prozprojekt.testingsystem.controllers.views.StudentView;
+import org.springframework.stereotype.Service;
+import pl.prozprojekt.testingsystem.controllers.controllers.StudentView;
 import pl.prozprojekt.testingsystem.entities.Student;
 
-@Component
+@Service
 public class StudentMapper implements Mapper<Student, StudentView> {
     @Override
     public StudentView convertToView(Student student) {

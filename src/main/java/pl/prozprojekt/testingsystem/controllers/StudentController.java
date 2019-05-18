@@ -3,7 +3,7 @@ package pl.prozprojekt.testingsystem.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.prozprojekt.testingsystem.controllers.views.StudentView;
+import pl.prozprojekt.testingsystem.controllers.controllers.StudentView;
 import pl.prozprojekt.testingsystem.entities.Student;
 import pl.prozprojekt.testingsystem.mappers.StudentMapper;
 import pl.prozprojekt.testingsystem.services.StudentService;
@@ -12,7 +12,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import javax.validation.ValidationException;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController

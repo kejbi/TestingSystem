@@ -9,14 +9,8 @@ public class Quiz {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany(cascade = {
-            CascadeType.MERGE,
-            CascadeType.PERSIST
-    })
-    @JoinTable(name="quiz_question",
-        joinColumns = @JoinColumn(name = "quiz_id"),
-        inverseJoinColumns = @JoinColumn(name = "question_id")
-    )
+    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    @JoinTable(name="quiz_question", joinColumns = @JoinColumn(name = "quiz_id"), inverseJoinColumns = @JoinColumn(name = "question_id"))
     private List<Question> questions;
 
     public Long getId() {

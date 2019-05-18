@@ -1,6 +1,4 @@
-package pl.prozprojekt.testingsystem.controllers.views;
-
-import javax.validation.constraints.NotNull;
+package pl.prozprojekt.testingsystem.controllers.controllers;
 
 public class StudentView extends UserView {
 
