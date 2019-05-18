@@ -25,13 +25,13 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/{id}")
     public Student getStudentById(@PathVariable Long id){
         Student student = studentService.getStudentById(id).orElseThrow(EntityNotFoundException::new);
         return student;
     }
 
-    @GetMapping("/")
+    @GetMapping(value = "/", params = "name")
     public Student getStudentByName(@RequestParam String name){
         Student student = studentService.getStudentByName(name).orElseThrow(EntityNotFoundException::new);
         return student;
@@ -50,7 +50,7 @@ public class StudentController {
         studentService.addStudent(student);
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping("/{id}")
     public void deleteStudentById(@PathVariable Long id){
         studentService.deleteStudentById(id);
     }
