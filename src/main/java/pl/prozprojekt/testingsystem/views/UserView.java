@@ -1,13 +1,14 @@
-package pl.prozprojekt.testingsystem.entities;
+package pl.prozprojekt.testingsystem.views;
 
-import javax.persistence.*;
 
-@MappedSuperclass
-public abstract class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import javax.validation.constraints.NotNull;
+
+public abstract class UserView {
+
+    @NotNull
     private Long id;
 
+    @NotNull
     private String name;
 
     public Long getId() {

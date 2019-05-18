@@ -1,34 +1,46 @@
 package pl.prozprojekt.testingsystem.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@AttributeOverrides({
-        @AttributeOverride(name = "id", column =
-            @Column(name = "STUDENT_ID"))
-})
 public class Student extends User {
-    //na razie do testow proste inty, potem będa to listy lub inne kolekcje
-    private int tests;
 
-    private int rozwiazane;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "students")
+    private List<Quiz> quizzes;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "student")
+    private List<SolvedQuiz> solvedQuizzes;
 
+    @ManyToOne
+    @JoinColumn(name = "fk_student_group")
+    private StudentGroup group;
 
-    public int getTests() {
-        return tests;
+    public List<Quiz> getQuizzes() {
+        return quizzes;
     }
 
-    public void setTests(int tests) {
-        this.tests = tests;
+    public void setQuizzes(List<Quiz> guizzes) {
+        this.quizzes = guizzes;
     }
 
-    public int getRozwiazane() {
-        return rozwiazane;
+    public List<SolvedQuiz> getSolvedQuizzes() {
+        return solvedQuizzes;
     }
 
-    public void setRozwiazane(int rozwiazane) {
-        this.rozwiazane = rozwiazane;
+    public void setSolvedQuizzes(List<SolvedQuiz> solvedQuizzes) {
+        this.solvedQuizzes = solvedQuizzes;
+    }
+
+    public StudentGroup getGroup() {
+        return group;
+    }
+
+    public void setGroup(StudentGroup group) {
+        this.group = group;
     }
 }

@@ -23,8 +23,7 @@ public class GroupService {
         return groupRepo.findAll();
     }
 
-    public void addGroup(StudentGroup group){
-        groupRepo.save(group);
+    public void addGroup(StudentGroup studentGroup){
     }
 
     public void deleteGroupById(Long id){
