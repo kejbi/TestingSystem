@@ -20,48 +20,38 @@ public class StudentController {
 
     private StudentService studentService;
 
-    private StudentMapper studentMapper;
-
     @Autowired
-    public StudentController(StudentService studentService, StudentMapper studentMapper) {
+    public StudentController(StudentService studentService) {
         this.studentService = studentService;
-        this.studentMapper = studentMapper;
     }
 
-    @GetMapping
-    public StudentView getStudentById(@RequestParam Long id){
+    @GetMapping("/")
+    public Student getStudentById(@PathVariable Long id){
         Student student = studentService.getStudentById(id).orElseThrow(EntityNotFoundException::new);
-
-        return studentMapper.convertToView(student);
+        return student;
     }
 
-    @GetMapping
-    public StudentView getStudentByName(@RequestParam String name){
+    @GetMapping("/")
+    public Student getStudentByName(@RequestParam String name){
         Student student = studentService.getStudentByName(name).orElseThrow(EntityNotFoundException::new);
-
-        return studentMapper.convertToView(student);
+        return student;
     }
 
-    @GetMapping("/all")
-    public List<StudentView> getAllStudents(){
-        return studentService.getAllStudents()
-                .stream()
-                .map(student -> studentMapper.convertToView(student))
-                .collect(Collectors.toList());
+    @GetMapping("/")
+    public List<Student> getAllStudents(){
+        return studentService.getAllStudents();
     }
 
-    @PostMapping
-    public void addStudent(@RequestBody @Valid StudentView studentView, BindingResult bidingResult){
+    @PostMapping("/")
+    public void addStudent(@RequestBody @Valid Student student, BindingResult bidingResult){
         if(bidingResult.hasErrors()){
             throw new ValidationException();
         }
-
-        Student student = studentMapper.convertToEntity(studentView);
         studentService.addStudent(student);
     }
 
-    @DeleteMapping
-    public void deleteStudentById(@RequestParam Long id){
+    @DeleteMapping("/")
+    public void deleteStudentById(@PathVariable Long id){
         studentService.deleteStudentById(id);
     }
 }
