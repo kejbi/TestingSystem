@@ -31,4 +31,15 @@ public class Quiz {
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
+
+    public void setStudents(List<Student> students)
+    {
+        this.students = students;
+    }
+
+    public List<Student> getStudents()
+    {
+        return students;
+    }
+
 }

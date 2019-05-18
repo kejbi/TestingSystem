@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import pl.prozprojekt.testingsystem.entities.Quiz;
+import pl.prozprojekt.testingsystem.mappers.QuizMapper;
 import pl.prozprojekt.testingsystem.services.QuizService;
 
 import java.util.List;
@@ -13,10 +14,12 @@ import java.util.Optional;
 @RequestMapping("/quizzes")
 public class QuizController {
     private QuizService quizService;
-
+    private QuizMapper quizMapper;
     @Autowired
-    public QuizController(QuizService quizService) {
+    public QuizController(QuizService quizService, QuizMapper quizMapper)
+    {
         this.quizService = quizService;
+        this.quizMapper = quizMapper;
     }
 
     @GetMapping
