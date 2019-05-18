@@ -3,6 +3,7 @@ package pl.prozprojekt.testingsystem.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
 import pl.prozprojekt.testingsystem.entities.Student;
 import pl.prozprojekt.testingsystem.mappers.StudentMapper;
 import pl.prozprojekt.testingsystem.services.StudentService;
@@ -33,18 +34,18 @@ public class StudentController {
         return studentMapper.convertToView(student);
     }
 
-    @GetMapping(value = "/", params = "name")
+    @GetMapping(params = "name")
     public StudentView getStudentByName(@RequestParam String name){
         Student student = studentService.getStudentByName(name).orElseThrow(EntityNotFoundException::new);
         return studentMapper.convertToView(student);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<StudentView> getAllStudents(){
         return studentService.getAllStudents().stream().map(student->studentMapper.convertToView(student)).collect(Collectors.toList());
     }
 
-    @PostMapping("/")
+    @PostMapping
     public void addStudent(@RequestBody @Valid Student student, BindingResult bidingResult){
         if(bidingResult.hasErrors()){
             throw new ValidationException();

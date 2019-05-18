@@ -24,6 +24,10 @@ public class TeacherService {
         return teacherRepo.findById(id);
     }
 
+    public Optional<Teacher> getTeacherByName(String name){
+        return teacherRepo.findTeacherByName(name);
+    }
+
     public List<Teacher> getAllTeachers(){
         return teacherRepo.findAll();
     }
