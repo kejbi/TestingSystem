@@ -1,4 +1,4 @@
-package pl.prozprojekt.testingsystem.controllers.controllers;
+package pl.prozprojekt.testingsystem.views;
 
 
 import javax.validation.constraints.NotNull;

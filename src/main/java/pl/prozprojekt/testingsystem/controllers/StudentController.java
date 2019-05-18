@@ -3,10 +3,10 @@ package pl.prozprojekt.testingsystem.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.prozprojekt.testingsystem.controllers.controllers.StudentView;
 import pl.prozprojekt.testingsystem.entities.Student;
 import pl.prozprojekt.testingsystem.mappers.StudentMapper;
 import pl.prozprojekt.testingsystem.services.StudentService;
+import pl.prozprojekt.testingsystem.views.StudentView;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
@@ -19,27 +19,29 @@ import java.util.stream.Collectors;
 public class StudentController {
 
     private StudentService studentService;
+    private StudentMapper studentMapper;
 
     @Autowired
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentService studentService, StudentMapper studentMapper) {
         this.studentService = studentService;
+        this.studentMapper = studentMapper;
     }
 
     @GetMapping("/{id}")
-    public Student getStudentById(@PathVariable Long id){
+    public StudentView getStudentById(@PathVariable Long id){
         Student student = studentService.getStudentById(id).orElseThrow(EntityNotFoundException::new);
-        return student;
+        return studentMapper.convertToView(student);
     }
 
     @GetMapping(value = "/", params = "name")
-    public Student getStudentByName(@RequestParam String name){
+    public StudentView getStudentByName(@RequestParam String name){
         Student student = studentService.getStudentByName(name).orElseThrow(EntityNotFoundException::new);
-        return student;
+        return studentMapper.convertToView(student);
     }
 
     @GetMapping("/")
-    public List<Student> getAllStudents(){
-        return studentService.getAllStudents();
+    public List<StudentView> getAllStudents(){
+        return studentService.getAllStudents().stream().map(student->studentMapper.convertToView(student)).collect(Collectors.toList());
     }
 
     @PostMapping("/")

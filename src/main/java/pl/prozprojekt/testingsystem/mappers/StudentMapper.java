@@ -1,7 +1,7 @@
 package pl.prozprojekt.testingsystem.mappers;
 
 import org.springframework.stereotype.Service;
-import pl.prozprojekt.testingsystem.controllers.controllers.StudentView;
+import pl.prozprojekt.testingsystem.views.StudentView;
 import pl.prozprojekt.testingsystem.entities.Student;
 
 @Service

@@ -1,4 +1,6 @@
-package pl.prozprojekt.testingsystem.controllers.controllers;
+package pl.prozprojekt.testingsystem.views;
+
+import pl.prozprojekt.testingsystem.views.UserView;
 
 public class StudentView extends UserView {
 
