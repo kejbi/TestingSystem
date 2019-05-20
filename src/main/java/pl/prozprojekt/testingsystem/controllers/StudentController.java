@@ -1,6 +1,7 @@
 package pl.prozprojekt.testingsystem.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/students")
+@Secured("ROLE_USER")
 public class StudentController {
 
     private StudentService studentService;

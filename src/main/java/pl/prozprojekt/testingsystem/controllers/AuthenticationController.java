@@ -16,6 +16,20 @@ import pl.prozprojekt.testingsystem.security.JwtTokenProvider;
 
 import javax.validation.Valid;
 
+/*
+DATABASE SCRIPT FOR TESTING:
+insert into role values (1, 'ROLE_USER');
+insert into student_group values (1);
+insert into student values (1, 'arton', '{noop}1234', 1); {noop} jest specjalnym oznaczeniem
+insert into student_roles values (1, 1);
+
+JSON do uzyskania tokena:
+{
+	"username":"arton",
+	"password":"1234"
+}
+ */
+
 @RestController
 @RequestMapping("/signin")
 public class AuthenticationController {

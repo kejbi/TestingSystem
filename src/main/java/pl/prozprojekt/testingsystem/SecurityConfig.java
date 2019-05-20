@@ -3,7 +3,6 @@ package pl.prozprojekt.testingsystem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -12,20 +11,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import pl.prozprojekt.testingsystem.entities.Role;
-import pl.prozprojekt.testingsystem.entities.Student;
-import pl.prozprojekt.testingsystem.entities.User;
-import pl.prozprojekt.testingsystem.security.CustomUserDetails;
 import pl.prozprojekt.testingsystem.security.CustomUserDetailsService;
 import pl.prozprojekt.testingsystem.security.JwtAuthenticationFilter;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /*
 DATABASE SCRIPT FOR TESTING:
 insert into role values (1, 'ROLE_USER');
