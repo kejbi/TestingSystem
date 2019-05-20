@@ -3,6 +3,7 @@ package pl.prozprojekt.testingsystem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -10,9 +11,32 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import pl.prozprojekt.testingsystem.entities.Role;
+import pl.prozprojekt.testingsystem.entities.Student;
+import pl.prozprojekt.testingsystem.entities.User;
+import pl.prozprojekt.testingsystem.security.CustomUserDetails;
 import pl.prozprojekt.testingsystem.security.CustomUserDetailsService;
 import pl.prozprojekt.testingsystem.security.JwtAuthenticationFilter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/*
+DATABASE SCRIPT FOR TESTING:
+insert into role values (1, 'ROLE_USER');
+insert into student_group values (1);
+insert into student values (1, 'arton', '{noop}1234', 1);
+insert into student_roles values (1, 1);
+
+dodatkowe info:
+login: arton
+hasło: 1234 - bez {noop}, bo to jest specjalne oznaczenie szyfrowania
+ */
 
 @Configuration
 @EnableWebSecurity
@@ -24,6 +48,8 @@ import pl.prozprojekt.testingsystem.security.JwtAuthenticationFilter;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     CustomUserDetailsService customUserDetailsService;
+    @Autowired
+    private AuthenticationEntryPoint unauthorizedHandler;
 
     @Bean(BeanIds.AUTHENTICATION_MANAGER)
     @Override
@@ -37,18 +63,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder
-                .userDetailsService(customUserDetailsService);
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(customUserDetailsService);
+            //.passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/teachers/**").authenticated()
-                .antMatchers("/dbconsole/**").permitAll();
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
+        http
+                .cors()
+                .and()
+                .csrf()
+                .disable()
+                .exceptionHandling()
+                .authenticationEntryPoint(unauthorizedHandler)
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
+                    .antMatchers("/**").permitAll()
+                    .antMatchers("/students/**").permitAll()
+                    .antMatchers("/teachers/**").permitAll()
+                    .antMatchers("/dbconsole/**").permitAll()
+                    .anyRequest().permitAll()
+                .and()
+                .headers()
+                .frameOptions()
+                .disable();
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }

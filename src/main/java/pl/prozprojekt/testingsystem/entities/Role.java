@@ -12,11 +12,11 @@ public class Role {
 
     private String name;
 
-    Role(String name){
+    public Role(String name){
         this.name = name;
     }
 
-    Role(){
+    public Role(){
 
     }
 

@@ -22,12 +22,12 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = studentRepo.findStudentByName(username).orElseThrow(()-> new UsernameNotFoundException("User not found"));
-        return new CustomUserDetails(user);
+        return CustomUserDetails.create(user);
     }
 
     @Transactional
-    public UserDetails loadUserById(Long id) {
+    public UserDetails loadUserById(long id) {
         User user = studentRepo.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found with id : " + id));
-        return new CustomUserDetails(user);
+        return CustomUserDetails.create(user);
     }
 }
