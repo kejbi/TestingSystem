@@ -1,6 +1,7 @@
 package pl.prozprojekt.testingsystem.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @MappedSuperclass
 public abstract class User {
@@ -9,6 +10,9 @@ public abstract class User {
     private Long id;
 
     private String name;
+    private String password;
+
+    private List<Role> roles;
 
     public Long getId() {
         return id;
@@ -24,5 +28,13 @@ public abstract class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
