@@ -1,10 +1,10 @@
 package pl.prozprojekt.testingsystem.mappers;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import pl.prozprojekt.testingsystem.entities.Teacher;
 import pl.prozprojekt.testingsystem.views.TeacherView;
 
-@Service
+@Component
 public class TeacherMapper implements Mapper<Teacher, TeacherView> {
     @Override
     public TeacherView convertToView(Teacher entity){
