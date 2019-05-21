@@ -1,7 +1,7 @@
 package pl.prozprojekt.testingsystem.mappers;
 
 import org.springframework.stereotype.Component;
-import pl.prozprojekt.testingsystem.controllers.views.StudentView;
+import pl.prozprojekt.testingsystem.views.StudentView;
 import pl.prozprojekt.testingsystem.entities.Student;
 
 @Component
