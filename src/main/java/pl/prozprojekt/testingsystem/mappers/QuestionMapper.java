@@ -11,7 +11,10 @@ public class QuestionMapper implements Mapper<Question, QuestionView> {
     {
         QuestionView view = new QuestionView();
 
-        view.setAnswers(q.getAnswers());
+        view.setAns1(q.getAns1());
+        view.setAns2(q.getAns2());
+        view.setAns3(q.getAns3());
+        view.setAns4(q.getAns4());
         view.setQuestion(q.getQuestion());
         view.setQuestionId(q.getId());
         view.setCorrect(-1);
@@ -25,7 +28,10 @@ public class QuestionMapper implements Mapper<Question, QuestionView> {
         Question q = new Question();
 
         q.setQuestion(view.getQuestion());
-        q.setAnswers(view.getAnswers());
+        q.setAns1(view.getAns1());
+        q.setAns2(view.getAns2());
+        q.setAns3(view.getAns3());
+        q.setAns4(view.getAns4());
         q.setId(view.getQuestionId());
         q.setCorrect(view.getCorrect());
 
