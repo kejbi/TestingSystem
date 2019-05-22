@@ -15,8 +15,19 @@ public class Question {
     @ManyToMany(mappedBy = "questions")
     private List<Quiz> quizzes;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Answer> answers;
+    //@OneToMany(fetch = FetchType.EAGER)
+    //private List<Answer> answers;
+    private List<String> answers;
+
+    private int correct;
+
+    public int getCorrect() {
+        return correct;
+    }
+
+    public void setCorrect(int correct) {
+        this.correct = correct;
+    }
 
     public Long getId() {
         return id;
@@ -34,11 +45,19 @@ public class Question {
         this.question = question;
     }
 
-    public List<Answer> getAnswers() {
+    public List<String> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<String> answers) {
+        this.answers = answers;
+    }
+
+        /*public List<Answer> getAnswers() {
         return answers;
     }
 
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
-    }
+    }*/
 }
