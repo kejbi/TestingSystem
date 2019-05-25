@@ -13,7 +13,6 @@ public class TeacherMapper implements Mapper<Teacher, TeacherView> {
         teacherView.setName(entity.getName());
         return teacherView;
     }
-
     @Override
     public Teacher convertToEntity(TeacherView view){
         Teacher teacher = new Teacher();

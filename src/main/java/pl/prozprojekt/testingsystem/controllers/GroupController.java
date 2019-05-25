@@ -31,7 +31,6 @@ public class GroupController {
 
     @PostMapping
     public void addGroup(@RequestBody StudentGroup studentGroup){
-        groupService.addGroup(studentGroup);
     }
 
     @DeleteMapping

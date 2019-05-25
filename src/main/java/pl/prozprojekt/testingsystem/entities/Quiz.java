@@ -16,6 +16,9 @@ public class Quiz {
     @ManyToMany
     private List<Student> students;
 
+    @ManyToOne
+    private Teacher teacher;
+
     public Long getId() {
         return id;
     }
@@ -30,5 +33,23 @@ public class Quiz {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    public void setStudents(List<Student> students)
+    {
+        this.students = students;
+    }
+
+    public List<Student> getStudents()
+    {
+        return students;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 }

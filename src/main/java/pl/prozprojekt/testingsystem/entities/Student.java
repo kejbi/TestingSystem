@@ -20,8 +20,8 @@ public class Student extends User {
         return quizzes;
     }
 
-    public void setQuizzes(List<Quiz> guizzes) {
-        this.quizzes = guizzes;
+    public void setQuizzes(List<Quiz> quizzes) {
+        this.quizzes = quizzes;
     }
 
     public List<SolvedQuiz> getSolvedQuizzes() {
