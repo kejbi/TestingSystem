@@ -1,5 +1,7 @@
 package pl.prozprojekt.testingsystem.entities;
 
+import pl.prozprojekt.testingsystem.mappers.StudentMapper;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -9,12 +11,17 @@ public class Quiz {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
     @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     @JoinTable(name="quiz_question", joinColumns = @JoinColumn(name = "quiz_id"), inverseJoinColumns = @JoinColumn(name = "question_id"))
     private List<Question> questions;
 
-    @ManyToMany
-    private List<Student> students;
+    @OneToMany(mappedBy = "quiz")
+    private List<SolvedQuiz> solvedQuizzes;
+
+    @ManyToOne
+    private StudentGroup studentGroup;
 
     @ManyToOne
     private Teacher teacher;
@@ -35,21 +42,5 @@ public class Quiz {
         this.questions = questions;
     }
 
-    public void setStudents(List<Student> students)
-    {
-        this.students = students;
-    }
 
-    public List<Student> getStudents()
-    {
-        return students;
-    }
-
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
 }

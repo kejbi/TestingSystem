@@ -12,7 +12,7 @@ public abstract class User {
     private String name;
     private String password;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Role> roles;
 
     public Long getId() {

@@ -8,7 +8,10 @@ public class SolvedQuiz {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private long answers;  //can be replaced later by string
+    private String answers;  //can be replaced later by string
+
+    @ManyToOne
+    private Quiz quiz;
 
     @ManyToOne
     private Student student;
@@ -21,11 +24,11 @@ public class SolvedQuiz {
         this.id = id;
     }
 
-    public long getAnswers() {
+    public String getAnswers() {
         return answers;
     }
 
-    public void setAnswers(long answers) {
+    public void setAnswers(String answers) {
         this.answers = answers;
     }
 
