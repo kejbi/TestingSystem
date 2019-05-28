@@ -6,8 +6,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.prozprojekt.testingsystem.entities.Student;
 import pl.prozprojekt.testingsystem.entities.User;
 import pl.prozprojekt.testingsystem.repositories.StudentRepo;
+import pl.prozprojekt.testingsystem.repositories.TeacherRepo;
+
+import java.util.Optional;
 
 /*
 Used to get info about user after logging in from database
@@ -16,18 +20,21 @@ Used to get info about user after logging in from database
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
-    StudentRepo studentRepo; //only students for now
+    StudentRepo studentRepo;
+    TeacherRepo teacherRepo;
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = studentRepo.findStudentByName(username).orElseThrow(()-> new UsernameNotFoundException("User not found"));
-        return CustomUserDetails.create(user);
+        Optional<? extends User> user = studentRepo.findStudentByName(username);
+        if(user.isEmpty())
+            user = teacherRepo.findTeacherByName(username);
+        return CustomUserDetails.create(user.orElseThrow(() -> new UsernameNotFoundException("User not found with name : " + username)));
     }
 
     @Transactional
     public UserDetails loadUserById(Long id) {
-        User user = studentRepo.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found with id : " + id));
+        User user = studentRepo.findById(id).orElseThrow(() -> new UsernameNotFoundException("Student not found with id : " + id));
         return CustomUserDetails.create(user);
     }
 }

@@ -3,6 +3,7 @@ package pl.prozprojekt.testingsystem.security;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pl.prozprojekt.testingsystem.entities.Student;
 import pl.prozprojekt.testingsystem.entities.User;
 
 import java.util.Collection;
@@ -18,40 +19,24 @@ public class CustomUserDetails implements UserDetails {
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public CustomUserDetails(long id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.authorities = authorities;
-        this.name = username;
-    }
+    private static final String studentRole = "ROLE_STUDENT";
+    private static final String teacherRole = "ROLE_TEACHER";
 
     public CustomUserDetails(User user) {
         this.id = user.getId();
         this.username = user.getName(); //name is also the username
         this.password = user.getPassword();
-        List<GrantedAuthority> authorities = new LinkedList<>();
-        authorities.add(new SimpleGrantedAuthority(user.getRole()));
-        this.authorities = authorities;
         this.name = user.getName();
+        List<GrantedAuthority> authorities = new LinkedList<>();
+        if(user instanceof Student)
+            authorities.add(new SimpleGrantedAuthority(studentRole));
+        else
+            authorities.add(new SimpleGrantedAuthority(teacherRole));
+        this.authorities = authorities;
     }
 
     public static CustomUserDetails create(User user) {
-        List<GrantedAuthority> authorities = new LinkedList<>();
-        authorities.add(new SimpleGrantedAuthority(user.getRole()));
-        return new CustomUserDetails(user.getId(), user.getName(), user.getPassword(), authorities);
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
-        this.authorities = authorities;
+        return new CustomUserDetails(user);
     }
 
     @Override
