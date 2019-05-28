@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import pl.prozprojekt.testingsystem.entities.User;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -29,15 +30,15 @@ public class CustomUserDetails implements UserDetails {
         this.id = user.getId();
         this.username = user.getName(); //name is also the username
         this.password = user.getPassword();
-        List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
-                new SimpleGrantedAuthority(role.getName())
-        ).collect(Collectors.toList());
+        List<GrantedAuthority> authorities = new LinkedList<>();
+        authorities.add(new SimpleGrantedAuthority(user.getRole()));
         this.authorities = authorities;
         this.name = user.getName();
     }
 
     public static CustomUserDetails create(User user) {
-        List<GrantedAuthority> authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+        List<GrantedAuthority> authorities = new LinkedList<>();
+        authorities.add(new SimpleGrantedAuthority(user.getRole()));
         return new CustomUserDetails(user.getId(), user.getName(), user.getPassword(), authorities);
     }
 

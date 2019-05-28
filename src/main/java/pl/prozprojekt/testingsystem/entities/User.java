@@ -12,8 +12,7 @@ public abstract class User {
     private String name;
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Role> roles;
+    private String role;
 
     public Long getId() {
         return id;
@@ -39,11 +38,11 @@ public abstract class User {
         this.password = password;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = role;
     }
 }
