@@ -13,8 +13,10 @@ public class Student extends User {
     @JoinColumn
     private StudentGroup studentGroup;
 
+    public static final String ROLE = "ROLE_STUDENT";
+
     public Student() {
-        setRole("ROLE_STUDENT");
+        setRole(ROLE);
     }
 
     public List<SolvedQuiz> getSolvedQuizzes() {

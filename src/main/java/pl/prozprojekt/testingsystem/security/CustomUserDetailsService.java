@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.prozprojekt.testingsystem.entities.Student;
 import pl.prozprojekt.testingsystem.entities.Teacher;
 import pl.prozprojekt.testingsystem.entities.User;
 import pl.prozprojekt.testingsystem.repositories.StudentRepo;
@@ -30,12 +31,16 @@ public class CustomUserDetailsService implements UserDetailsService {
         Optional<? extends User> user = studentRepo.findStudentByName(username);
         if(user.isEmpty())
             user = teacherRepo.findTeacherByName(username);
-        return CustomUserDetails.create(user.orElseThrow(()-> new UsernameNotFoundException("User not found")));
+        return CustomUserDetails.create(user.orElseThrow(()-> new UsernameNotFoundException("User not found with name " + username)));
     }
 
     @Transactional
-    public UserDetails loadUserById(Long id) {
-        User user = studentRepo.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found with id : " + id));
+    public UserDetails loadUserById(Long id, String role) {
+        User user;
+        if(role.equals(Student.ROLE))
+            user = studentRepo.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found with id : " + id));
+        else
+            user = teacherRepo.findById(id).orElseThrow(() -> new UsernameNotFoundException("Teacher not found with id : " + id));
         return CustomUserDetails.create(user);
     }
 }

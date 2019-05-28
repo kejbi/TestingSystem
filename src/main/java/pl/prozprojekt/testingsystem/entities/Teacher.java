@@ -11,8 +11,10 @@ public class Teacher extends User {
     @OneToMany(mappedBy = "teacher")
     private List<Quiz> quizzes;
 
+    public static final String ROLE = "ROLE_TEACHER";
+
     public Teacher() {
-        setRole("ROLE_TEACHER");
+        setRole(ROLE);
     }
 
     public List<Quiz> getQuizzes() {
