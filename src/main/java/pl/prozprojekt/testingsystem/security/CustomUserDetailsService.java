@@ -11,6 +11,8 @@ import pl.prozprojekt.testingsystem.entities.User;
 import pl.prozprojekt.testingsystem.repositories.StudentRepo;
 import pl.prozprojekt.testingsystem.repositories.TeacherRepo;
 
+import java.util.Optional;
+
 /*
 Used to get info about user after logging in from database
  */
@@ -18,23 +20,17 @@ Used to get info about user after logging in from database
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
-    StudentRepo studentRepo; //only students for now
+    StudentRepo studentRepo;
     @Autowired
     TeacherRepo teacherRepo;
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var userOptional = studentRepo.findStudentByName(username);
-        User user;
-        if(userOptional.isEmpty()){
-            user = teacherRepo.findTeacherByName(username)
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        }
-        else{
-            user = userOptional.get();
-        }
-        return CustomUserDetails.create(user);
+        Optional<? extends User> user = studentRepo.findStudentByName(username);
+        if(user.isEmpty())
+            user = teacherRepo.findTeacherByName(username);
+        return CustomUserDetails.create(user.orElseThrow(()-> new UsernameNotFoundException("User not found")));
     }
 
     @Transactional

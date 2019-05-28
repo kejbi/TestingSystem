@@ -12,8 +12,7 @@ public class Teacher extends User {
     private List<Quiz> quizzes;
 
     public Teacher() {
-        this.setStudent(false);
-        setRole("ROLE_USER");
+        setRole("ROLE_TEACHER");
     }
 
     public List<Quiz> getQuizzes() {

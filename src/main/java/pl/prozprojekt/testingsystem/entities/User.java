@@ -12,9 +12,8 @@ public abstract class User {
     private String name;
     private String password;
 
+    @Transient
     private String role;
-
-    private boolean isStudent;
 
     public Long getId() {
         return id;
@@ -46,13 +45,5 @@ public abstract class User {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public boolean isStudent() {
-        return isStudent;
-    }
-
-    public void setStudent(boolean student) {
-        isStudent = student;
     }
 }

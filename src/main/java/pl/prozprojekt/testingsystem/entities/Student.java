@@ -14,8 +14,7 @@ public class Student extends User {
     private StudentGroup studentGroup;
 
     public Student() {
-        this.setStudent(true);
-        setRole("ROLE_USER");
+        setRole("ROLE_STUDENT");
     }
 
     public List<SolvedQuiz> getSolvedQuizzes() {
