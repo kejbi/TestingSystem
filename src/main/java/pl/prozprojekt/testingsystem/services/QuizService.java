@@ -24,6 +24,10 @@ public class QuizService {
         return quizRepo.findAll();
     }
 
+    public List<Quiz> getQuizzesByGroupId(Long id){
+       return quizRepo.getQuizzesByStudentGroupId(id);
+    }
+
     public void addQuiz(Quiz quiz){ quizRepo.save(quiz); }
 
     public void deleteQuizById(Long id){ quizRepo.deleteById(id); }

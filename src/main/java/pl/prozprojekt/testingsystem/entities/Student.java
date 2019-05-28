@@ -13,6 +13,10 @@ public class Student extends User {
     @JoinColumn
     private StudentGroup studentGroup;
 
+    public Student() {
+        this.setStudent(true);
+    }
+
     public List<SolvedQuiz> getSolvedQuizzes() {
         return solvedQuizzes;
     }
@@ -28,4 +32,14 @@ public class Student extends User {
     public void setGroup(StudentGroup group) {
         this.studentGroup = group;
     }
+
+    public StudentGroup getStudentGroup() {
+        return studentGroup;
+    }
+
+    public void setStudentGroup(StudentGroup studentGroup) {
+        this.studentGroup = studentGroup;
+    }
+
+
 }

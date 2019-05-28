@@ -34,6 +34,13 @@ public class QuizController {
         return quizMapper.convertToView(quiz);
     }
 
+    @GetMapping("/group/{id}")
+    public List<QuizView> getQuizzesByGroupId(@PathVariable Long id){
+        return quizService.getQuizzesByGroupId(id).stream()
+                .map(quiz -> quizMapper.convertToView(quiz))
+                .collect(Collectors.toList());
+    }
+
     @GetMapping
     public List<QuizView> getAllQuizzes(){
         return quizService.getAllQuizzes().stream().map(quiz->quizMapper.convertToView(quiz)).collect(Collectors.toList());

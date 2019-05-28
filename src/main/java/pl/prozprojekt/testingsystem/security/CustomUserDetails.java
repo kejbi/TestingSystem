@@ -5,10 +5,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.prozprojekt.testingsystem.entities.User;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CustomUserDetails implements UserDetails {
@@ -16,30 +13,32 @@ public class CustomUserDetails implements UserDetails {
     private String name;
     private String username;
     private String password;
+    private boolean isStudent;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public CustomUserDetails(long id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public CustomUserDetails(long id, String username, String password, Collection<? extends GrantedAuthority> authorities, boolean isStudent) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
         this.name = username;
+        this.isStudent = isStudent;
     }
 
     public CustomUserDetails(User user) {
         this.id = user.getId();
         this.username = user.getName(); //name is also the username
         this.password = user.getPassword();
-        List<GrantedAuthority> authorities = new LinkedList<>();
-        authorities.add(new SimpleGrantedAuthority(user.getRole()));
+        List<GrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority(user.getRole()));
         this.authorities = authorities;
         this.name = user.getName();
+        this.isStudent = user.isStudent();
     }
 
     public static CustomUserDetails create(User user) {
         List<GrantedAuthority> authorities = new LinkedList<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole()));
-        return new CustomUserDetails(user.getId(), user.getName(), user.getPassword(), authorities);
+        return new CustomUserDetails(user.getId(), user.getName(), user.getPassword(), authorities, user.isStudent());
     }
 
     public void setUsername(String username) {
@@ -52,6 +51,14 @@ public class CustomUserDetails implements UserDetails {
 
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
         this.authorities = authorities;
+    }
+
+    public boolean isStudent() {
+        return isStudent;
+    }
+
+    public void setStudent(boolean student) {
+        isStudent = student;
     }
 
     @Override

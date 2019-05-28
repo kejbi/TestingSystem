@@ -14,6 +14,8 @@ public abstract class User {
 
     private String role;
 
+    private boolean isStudent;
+
     public Long getId() {
         return id;
     }
@@ -44,5 +46,13 @@ public abstract class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public boolean isStudent() {
+        return isStudent;
+    }
+
+    public void setStudent(boolean student) {
+        isStudent = student;
     }
 }

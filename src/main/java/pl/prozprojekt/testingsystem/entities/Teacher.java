@@ -11,6 +11,10 @@ public class Teacher extends User {
     @OneToMany(mappedBy = "teacher")
     private List<Quiz> quizzes;
 
+    public Teacher() {
+        this.setStudent(false);
+    }
+
     public List<Quiz> getQuizzes() {
         return quizzes;
     }
