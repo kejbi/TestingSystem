@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import pl.prozprojekt.testingsystem.security.CustomUserDetails;
 
 import java.util.Date;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtTokenProvider {
@@ -26,14 +27,23 @@ public class JwtTokenProvider {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
-
         return Jwts.builder()
                 .setSubject(Long.toString(userDetails.getId()))
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
+                .claim("role", userDetails.getAuthorities().stream().collect(Collectors.toList()).get(0).toString())
+                .claim("id", Long.toString(userDetails.getId()))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
-                .claim("role",userDetails.getAuthorities()
                 .compact();
+    }
+
+    public String getUserRoleFromJWT(String token){
+        Claims claims = Jwts.parser()
+                .setSigningKey(jwtSecret)
+                .parseClaimsJws(token)
+                .getBody();
+
+        return claims.get("role").toString();
     }
 
     public Long getUserIdFromJWT(String token) {
