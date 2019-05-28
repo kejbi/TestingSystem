@@ -31,6 +31,8 @@ public class JwtTokenProvider {
                 .setSubject(Long.toString(userDetails.getId()))
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
+                .claim("role", userDetails.getAuthorities())
+                .claim("id", Long.toString(userDetails.getId()))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
@@ -41,7 +43,23 @@ public class JwtTokenProvider {
                 .parseClaimsJws(token)
                 .getBody();
 
-        return Long.parseLong(claims.getSubject());
+        return Long.parseLong((String)claims.get("id"));
+    }
+
+    public String getUserRoleFromJWT(String token){
+        Claims claims = Jwts.parser()
+                .setSigningKey(jwtSecret)
+                .parseClaimsJws(token)
+                .getBody();
+
+        return (String)claims.get("role");
+    }
+
+    public boolean userIsStudent(String token){
+        String role = getUserRoleFromJWT(token);
+        if(role == "ROLE_STUDENT")
+            return true;
+        return false;
     }
 
     public boolean validateToken(String authToken) {
