@@ -24,6 +24,10 @@ public class QuestionService {
         return questionRepo.findAll();
     }
 
+    public List<Question> getQuestionsByQuizId(Long id){
+        return questionRepo.findQuestionsByQuizId(id);
+    }
+
     public void addQuestion(Question question){
         questionRepo.save(question);
     }

@@ -70,12 +70,12 @@ public class DataLoader implements CommandLineRunner {
         Teacher teacher = new Teacher();
         teacher.setId(1);
         teacher.setName("PanPawel");
-        teacher.setPassword("password");
+        teacher.setPassword("{noop}password");
 
         Teacher teacher2 = new Teacher();
         teacher2.setId(2);
         teacher2.setName("Szef");
-        teacher2.setPassword("12345");
+        teacher2.setPassword("{noop}12345");
 
         StudentGroup group1 = new StudentGroup();
         StudentGroup group2 = new StudentGroup();
@@ -113,13 +113,13 @@ public class DataLoader implements CommandLineRunner {
         Student student1 = new Student();
         student1.setId(1);
         student1.setName("Maniek");
-        student1.setPassword("admin1");
+        student1.setPassword("{noop}admin1");
         student1.setSolvedQuizzes(Collections.emptyList());
         student1.setGroup(group1);
         Student student2 = new Student();
         student2.setId(2);
         student2.setName("Brajanek");
-        student2.setPassword("haslo");
+        student2.setPassword("{noop}haslo");
         student2.setSolvedQuizzes(Collections.emptyList());
         student2.setGroup(group2);
 

@@ -29,10 +29,10 @@ public class JwtTokenProvider {
 
         return Jwts.builder()
                 .setSubject(Long.toString(userDetails.getId()))
-                .claim("isStudent",userDetails.isStudent())
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .claim("isStudent",userDetails.isStudent())
                 .compact();
     }
 

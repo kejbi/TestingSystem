@@ -15,6 +15,7 @@ public class Student extends User {
 
     public Student() {
         this.setStudent(true);
+        setRole("ROLE_USER");
     }
 
     public List<SolvedQuiz> getSolvedQuizzes() {

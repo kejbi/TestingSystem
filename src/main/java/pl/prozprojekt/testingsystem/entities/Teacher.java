@@ -13,6 +13,7 @@ public class Teacher extends User {
 
     public Teacher() {
         this.setStudent(false);
+        setRole("ROLE_USER");
     }
 
     public List<Quiz> getQuizzes() {
