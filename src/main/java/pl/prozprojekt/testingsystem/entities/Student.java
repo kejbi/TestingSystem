@@ -10,6 +10,7 @@ public class Student extends User {
     private List<SolvedQuiz> solvedQuizzes;
 
     @ManyToOne
+    @JoinColumn
     private StudentGroup studentGroup;
 
     public List<SolvedQuiz> getSolvedQuizzes() {

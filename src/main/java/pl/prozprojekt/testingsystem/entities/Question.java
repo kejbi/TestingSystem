@@ -12,7 +12,7 @@ public class Question {
 
     private String question;
 
-    @ManyToMany(mappedBy = "questions")
+    @ManyToMany(mappedBy = "questions", cascade = {CascadeType.MERGE})
     private List<Quiz> quizzes;
 
     //@OneToMany(fetch = FetchType.EAGER)

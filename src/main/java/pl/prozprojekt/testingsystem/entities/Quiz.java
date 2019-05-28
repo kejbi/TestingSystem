@@ -13,7 +13,7 @@ public class Quiz {
 
     private String name;
 
-    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    @ManyToMany(cascade = { CascadeType.MERGE})
     @JoinTable(name="quiz_question", joinColumns = @JoinColumn(name = "quiz_id"), inverseJoinColumns = @JoinColumn(name = "question_id"))
     private List<Question> questions;
 
@@ -21,9 +21,11 @@ public class Quiz {
     private List<SolvedQuiz> solvedQuizzes;
 
     @ManyToOne
+    @JoinColumn
     private StudentGroup studentGroup;
 
     @ManyToOne
+    @JoinColumn
     private Teacher teacher;
 
     public Long getId() {

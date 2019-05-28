@@ -4,6 +4,7 @@ package pl.prozprojekt.testingsystem.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import pl.prozprojekt.testingsystem.repositories.RoleRepo;
 import pl.prozprojekt.testingsystem.services.*;
 import pl.prozprojekt.testingsystem.entities.*;
 
@@ -13,20 +14,22 @@ import java.util.List;
 
 @Component
 public class DataLoader implements CommandLineRunner {
-    StudentService studentService;
-    TeacherService teacherService;
-    QuizService quizService;
-    QuestionService questionService;
-    GroupService groupService;
+    private StudentService studentService;
+    private TeacherService teacherService;
+    private QuizService quizService;
+    private QuestionService questionService;
+    private GroupService groupService;
+    private RoleRepo roleRepo;
 
     @Autowired
-    public DataLoader(StudentService studentService, TeacherService teacherService, QuizService quizService, QuestionService questionService, GroupService groupService)
+    public DataLoader(StudentService studentService, TeacherService teacherService, QuizService quizService, QuestionService questionService, GroupService groupService, RoleRepo roleRepo)
     {
         this.quizService = quizService;
         this.studentService = studentService;
         this.teacherService = teacherService;
         this.questionService = questionService;
         this.groupService = groupService;
+        this.roleRepo = roleRepo;
     }
     @Override
     public void run(String... strings)
@@ -87,19 +90,23 @@ public class DataLoader implements CommandLineRunner {
 
         Quiz quiz = new Quiz();
         quiz.setName("Test z przyrki");
+        quiz.setQuestions(questionlist1);
         quiz.setTeacher(teacher);
         quiz.setStudentGroup(group1);
         Quiz quiz2 = new Quiz();
         quiz2.setName("Test z majcy");
-        quiz2.setTeacher(teacher);
+        quiz2.setQuestions(questionlist2);
+        quiz2.setTeacher(teacher2);
         quiz2.setStudentGroup(group2);
         Quiz quiz3 = new Quiz();
         quiz3.setName("Test z infy");
-        quiz3.setStudentGroup(group1);
+        quiz3.setQuestions(questionlist3);
         quiz3.setTeacher(teacher2);
+        quiz3.setStudentGroup(group1);
         Quiz quiz4 = new Quiz();
         quiz4.setName("Test z religii");
-        quiz4.setTeacher(teacher2);
+        quiz4.setQuestions(questionlist4);
+        quiz4.setTeacher(teacher);
         quiz4.setStudentGroup(group2);
 
         List<Quiz> list1 = Arrays.asList(quiz, quiz4);
@@ -107,11 +114,9 @@ public class DataLoader implements CommandLineRunner {
         List<Quiz> list3 = Arrays.asList(quiz2, quiz3);
         List<Quiz> list4 = Arrays.asList(quiz2, quiz4);
 
+        teacher.setQuizzes(list1);
+        teacher2.setQuizzes(list3);
 
-        question1.setQuizzes(list1);
-        question2.setQuizzes(list2);
-        question3.setQuizzes(list3);
-        question4.setQuizzes(list4);
 
         Student student1 = new Student();
         student1.setId(1);
@@ -128,19 +133,29 @@ public class DataLoader implements CommandLineRunner {
         student2.setSolvedQuizzes(Collections.emptyList());
         student2.setGroup(group2);
 
-        this.questionService.addQuestion(question1);
-        this.questionService.addQuestion(question2);
-        this.questionService.addQuestion(question3);
-        this.questionService.addQuestion(question4);
+        group1.setQuizzes(list2);
+        group2.setQuizzes(list4);
+        group1.setStudents(Arrays.asList(student1));
+        group2.setStudents(Arrays.asList(student2));
+
+
         this.teacherService.addTeacher(teacher);
         this.teacherService.addTeacher(teacher2);
         this.groupService.addGroup(group1);
         this.groupService.addGroup(group2);
         this.studentService.addStudent(student1);
         this.studentService.addStudent(student2);
+        this.questionService.addQuestion(question1);
+        this.questionService.addQuestion(question2);
+        this.questionService.addQuestion(question3);
+        this.questionService.addQuestion(question4);
+
         this.quizService.addQuiz(quiz);
         this.quizService.addQuiz(quiz2);
         this.quizService.addQuiz(quiz3);
         this.quizService.addQuiz(quiz4);
+
+
+
     }
 }

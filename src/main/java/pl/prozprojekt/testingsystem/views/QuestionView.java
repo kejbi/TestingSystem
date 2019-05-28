@@ -1,17 +1,25 @@
 package pl.prozprojekt.testingsystem.views;
 
-import java.util.List;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class QuestionView {
 
     private Long questionId;
+    @NotBlank
     private String question;
+    @NotBlank
     private String ans1;
+    @NotBlank
     private String ans2;
+    @NotBlank
     private String ans3;
+    @NotBlank
     private String ans4;
 
+    @NotNull
     private int correct;
+
 
     public int getCorrect() {
         return correct;

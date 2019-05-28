@@ -11,6 +11,7 @@ public class QuizMapper implements Mapper<Quiz, QuizView>{
  {
      QuizView quizView = new QuizView();
      quizView.setId(quiz.getId());
+     quizView.setName(quiz.getName());
      return quizView;
  }
 
@@ -19,6 +20,7 @@ public class QuizMapper implements Mapper<Quiz, QuizView>{
  {
      Quiz quiz = new Quiz();
      quiz.setId(quizView.getId());
+     quiz.setName(quizView.getName());
      return quiz;
  }
 }
