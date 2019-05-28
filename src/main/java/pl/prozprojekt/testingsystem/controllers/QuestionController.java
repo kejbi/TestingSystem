@@ -30,8 +30,10 @@ public class QuestionController {
     }
 
     @GetMapping("/all")
-    public List<Question> getAllQuestions(){
-        return questionService.getAllQuestions();
+    public List<QuestionView> getAllQuestions(){
+        return questionService.getAllQuestions().stream()
+                .map(question -> questionMapper.convertToView(question))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/quiz/{id}")

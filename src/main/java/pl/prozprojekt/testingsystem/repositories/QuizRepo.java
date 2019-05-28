@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface QuizRepo extends JpaRepository<Quiz, Long> {
     List<Quiz> getQuizzesByStudentGroupId(Long id);
+
+    List<Quiz> getQuizzesByTeacherId(Long id);
 }
