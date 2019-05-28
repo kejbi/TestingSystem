@@ -81,6 +81,14 @@ public class Question {
         this.question = question;
     }
 
+    public List<Quiz> getQuizzes() {
+        return quizzes;
+    }
+
+    public void setQuizzes(List<Quiz> quizzes) {
+        this.quizzes = quizzes;
+    }
+
     /*public List<String> getAnswers() {
         return answers;
     }

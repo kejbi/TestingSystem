@@ -24,6 +24,7 @@ public class GroupService {
     }
 
     public void addGroup(StudentGroup studentGroup){
+        groupRepo.save(studentGroup);
     }
 
     public void deleteGroupById(Long id){
