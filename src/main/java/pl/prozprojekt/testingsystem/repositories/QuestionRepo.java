@@ -12,4 +12,6 @@ import java.util.List;
 public interface QuestionRepo extends JpaRepository<Question, Long> {
     @Query( value = "select q.* from question q, quiz_question qq where qq.quiz_id=?1 and q.id=qq.question_id ", nativeQuery = true)
     List<Question> findQuestionsByQuizId(Long id);
+
+    List<Question> findAllByIdIn(List<Long> list);
 }

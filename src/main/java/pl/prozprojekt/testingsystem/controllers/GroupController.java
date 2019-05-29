@@ -4,19 +4,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import pl.prozprojekt.testingsystem.entities.StudentGroup;
+import pl.prozprojekt.testingsystem.mappers.GroupMapper;
 import pl.prozprojekt.testingsystem.services.GroupService;
+import pl.prozprojekt.testingsystem.views.GroupView;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/groups")
 public class GroupController {
     private GroupService groupService;
 
+    private GroupMapper groupMapper;
+
     @Autowired
-    public GroupController(GroupService groupService) {
+    public GroupController(GroupService groupService, GroupMapper groupMapper) {
         this.groupService = groupService;
+        this.groupMapper = groupMapper;
     }
 
     @GetMapping
@@ -25,8 +31,8 @@ public class GroupController {
     }
 
     @GetMapping("/all")
-    public List<StudentGroup> getAllGroups(){
-        return groupService.getAllGroups();
+    public List<GroupView> getAllGroups(){
+        return groupService.getAllGroups().stream().map(group -> groupMapper.convertToView(group)).collect(Collectors.toList());
     }
 
     @PostMapping

@@ -78,7 +78,9 @@ public class DataLoader implements CommandLineRunner {
         teacher2.setPassword("{noop}12345");
 
         StudentGroup group1 = new StudentGroup();
+        group1.setName("4I1");
         StudentGroup group2 = new StudentGroup();
+        group2.setName("Grzybki");
 
         Quiz quiz = new Quiz();
         quiz.setName("Test z przyrki");

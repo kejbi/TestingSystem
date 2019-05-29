@@ -28,8 +28,12 @@ public class QuestionService {
         return questionRepo.findQuestionsByQuizId(id);
     }
 
-    public void addQuestion(Question question){
-        questionRepo.save(question);
+    public List<Question> getAllQuestionsByIdIn(List<Long> list){
+        return questionRepo.findAllByIdIn(list);
+    }
+
+    public Question addQuestion(Question question){
+        return questionRepo.save(question);
     }
 
     public void deleteQuestionById(Long id){
