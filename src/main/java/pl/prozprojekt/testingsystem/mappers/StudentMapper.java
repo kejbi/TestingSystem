@@ -13,6 +13,7 @@ public class StudentMapper implements Mapper<Student, StudentView> {
         studentView.setId(student.getId());
         studentView.setName(student.getName());
         studentView.setGruopId(student.getGroup().getId());
+        studentView.setGroupName(student.getGroup().getName());
 
         return studentView;
     }

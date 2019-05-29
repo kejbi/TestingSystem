@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 import pl.prozprojekt.testingsystem.entities.SolvedQuiz;
 import pl.prozprojekt.testingsystem.views.SolvedQuizView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class SolvedQuizMapper implements Mapper<SolvedQuiz, SolvedQuizView>{
     @Override
@@ -11,6 +14,16 @@ public class SolvedQuizMapper implements Mapper<SolvedQuiz, SolvedQuizView>{
     {
         SolvedQuizView solvedView = new SolvedQuizView();
         solvedView.setId(solved.getId());
+        List<Integer> answers = new ArrayList<>();
+        char[] stringAnswers= solved.getAnswers().toCharArray();
+        for(char a: stringAnswers){
+            answers.add(Character.getNumericValue(a));
+        }
+        solvedView.setAnswers(answers);
+        solvedView.setScore(solved.getScore());
+        solvedView.setPercent(solved.getPercent());
+        solvedView.setName(solved.getQuiz().getName());
+        solvedView.setStudent(solved.getStudent().getName());
         return solvedView;
     }
 

@@ -35,6 +35,8 @@ public class GroupController {
         return groupService.getAllGroups().stream().map(group -> groupMapper.convertToView(group)).collect(Collectors.toList());
     }
 
+
+
     @PostMapping
     public void addGroup(@RequestBody StudentGroup studentGroup){
         groupService.addGroup(studentGroup);

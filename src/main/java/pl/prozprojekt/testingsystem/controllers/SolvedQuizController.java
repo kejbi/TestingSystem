@@ -2,6 +2,7 @@ package pl.prozprojekt.testingsystem.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.prozprojekt.testingsystem.entities.Question;
@@ -49,8 +50,18 @@ public class SolvedQuizController {
         return solvedService.getAllSolved().stream().map(solved->solvedMapper.convertToView(solved)).collect(Collectors.toList());
     }
 
+    @GetMapping("/student/{id}")
+    public List<SolvedQuizView> getSolvedQuizzesByStudentId(@PathVariable Long id){
+        return solvedService.getSolvedQuizzesByStudentId(id).stream().map(solvedQuiz -> solvedMapper.convertToView(solvedQuiz)).collect(Collectors.toList());
+    }
+
+    @GetMapping("/quiz/{id}")
+    public List<SolvedQuizView> getSolvedQuizzesByQuizId(@PathVariable Long id){
+        return solvedService.getSolvedQuizzesByQuizId(id).stream().map(solvedQuiz -> solvedMapper.convertToView(solvedQuiz)).collect(Collectors.toList());
+    }
+
     @PostMapping
-    public void addSolved(@RequestBody @Valid QuizSolveRequest quizSolveRequest, BindingResult bidingResult){
+    public ResponseEntity<?> addSolved(@RequestBody @Valid QuizSolveRequest quizSolveRequest, BindingResult bidingResult){
         if(bidingResult.hasErrors()){
             throw new ValidationException();
         }
@@ -80,6 +91,7 @@ public class SolvedQuizController {
         solved.setStudent(student);
         solved.setPercent((100*score)/all);
         solvedService.addSolved(solved);
+        return ResponseEntity.ok("Success");
     }
 
     @DeleteMapping("/{id}")

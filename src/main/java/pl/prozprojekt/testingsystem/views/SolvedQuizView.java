@@ -10,6 +10,46 @@ public class SolvedQuizView {
     @NotNull
     private List<Integer> answers;
 
+    private int score;
+
+    private int percent;
+
+    private String name;
+
+    private String student;
+
+    public String getStudent() {
+        return student;
+    }
+
+    public void setStudent(String student) {
+        this.student = student;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getPercent() {
+        return percent;
+    }
+
+    public void setPercent(int percent) {
+        this.percent = percent;
+    }
+
     public Long getId() {
         return id;
     }

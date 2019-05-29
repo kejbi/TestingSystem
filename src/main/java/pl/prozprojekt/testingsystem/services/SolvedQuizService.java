@@ -23,6 +23,14 @@ public class SolvedQuizService {
         return solvedRepo.findAll();
     }
 
+    public List<SolvedQuiz> getSolvedQuizzesByStudentId(Long id){
+        return solvedRepo.getSolvedQuizsByStudentId(id);
+    }
+
+    public List<SolvedQuiz> getSolvedQuizzesByQuizId(Long id){
+        return solvedRepo.getSolvedQuizsByQuizId(id);
+    }
+
     public void addSolved(SolvedQuiz quiz){ solvedRepo.save(quiz); }
 
     public void deleteSolvedById(Long id){ solvedRepo.deleteById(id); }
