@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.prozprojekt.testingsystem.entities.SolvedQuiz;
 import pl.prozprojekt.testingsystem.mappers.SolvedQuizMapper;
+import pl.prozprojekt.testingsystem.payload.QuizSolveRequest;
 import pl.prozprojekt.testingsystem.services.SolvedQuizService;
 import pl.prozprojekt.testingsystem.views.SolvedQuizView;
 
@@ -40,11 +41,10 @@ public class SolvedQuizController {
     }
 
     @PostMapping
-    public void addSolved(@RequestBody @Valid SolvedQuiz solved, BindingResult bidingResult){
+    public void addSolved(@RequestBody @Valid QuizSolveRequest quizSolveRequest, BindingResult bidingResult){
         if(bidingResult.hasErrors()){
             throw new ValidationException();
         }
-        solvedService.addSolved(solved);
     }
 
     @DeleteMapping("/{id}")
