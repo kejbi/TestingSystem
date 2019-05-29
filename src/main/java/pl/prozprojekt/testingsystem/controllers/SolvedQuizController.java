@@ -30,10 +30,12 @@ public class SolvedQuizController {
     private StudentService studentService;
 
     @Autowired
-    public SolvedQuizController(SolvedQuizService solvedService, SolvedQuizMapper solvedMapper)
+    public SolvedQuizController(SolvedQuizService solvedService, SolvedQuizMapper solvedMapper, QuizService quizService, StudentService studentService)
     {
         this.solvedService = solvedService;
         this.solvedMapper = solvedMapper;
+        this.quizService = quizService;
+        this.studentService = studentService;
     }
 
     @GetMapping("/{id}")
@@ -52,11 +54,13 @@ public class SolvedQuizController {
         if(bidingResult.hasErrors()){
             throw new ValidationException();
         }
+
         List<Integer> answers = quizSolveRequest.getAnswers();
-        String ans = new String();
+        String ans = "";
         int all = 0;
         int score = 0;
         Long id = quizSolveRequest.getQuizId();
+
         Quiz quiz = quizService.getQuizById(id).orElseThrow(EntityNotFoundException::new);
         Student student = studentService.getStudentById(quizSolveRequest.getStudentId()).orElseThrow(EntityNotFoundException::new);
 
@@ -64,8 +68,9 @@ public class SolvedQuizController {
             if(answers.get(all) == q.getCorrect()) {
                 score += 1;
             }
-            all += 1;
             ans += answers.get(all);
+            all += 1;
+
         }
 
         SolvedQuiz solved = new SolvedQuiz();
@@ -73,6 +78,7 @@ public class SolvedQuizController {
         solved.setScore(score);
         solved.setQuiz(quiz);
         solved.setStudent(student);
+        solved.setPercent((100*score)/all);
         solvedService.addSolved(solved);
     }
 

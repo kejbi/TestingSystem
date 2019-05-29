@@ -17,6 +17,15 @@ public class SolvedQuiz {
     private Student student;
 
     private int score;
+    private int percent;
+
+    public int getPercent() {
+        return percent;
+    }
+
+    public void setPercent(int percent) {
+        this.percent = percent;
+    }
 
     public int getScore() {
         return score;
