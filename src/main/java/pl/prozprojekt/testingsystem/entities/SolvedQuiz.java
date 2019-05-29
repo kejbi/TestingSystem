@@ -16,6 +16,16 @@ public class SolvedQuiz {
     @ManyToOne
     private Student student;
 
+    private int score;
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public long getId() {
         return id;
     }
