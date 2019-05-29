@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/students")
-@Secured("ROLE_USER")
+@Secured("ROLE_STUDENT")
 public class StudentController {
 
     private StudentService studentService;
