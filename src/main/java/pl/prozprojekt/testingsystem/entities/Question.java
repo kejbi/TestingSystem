@@ -85,5 +85,5 @@ public class Question {
     public void setQuizzes(List<Quiz> quizzes) {
         this.quizzes = quizzes;
     }
-    
+
 }

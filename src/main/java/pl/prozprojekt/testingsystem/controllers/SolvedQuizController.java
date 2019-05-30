@@ -3,6 +3,7 @@ package pl.prozprojekt.testingsystem.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.prozprojekt.testingsystem.entities.Question;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/solved")
+@Secured({"ROLE_STUDENT", "ROLE_TEACHER"})
 public class SolvedQuizController {
     private SolvedQuizService solvedService;
     private SolvedQuizMapper solvedMapper;

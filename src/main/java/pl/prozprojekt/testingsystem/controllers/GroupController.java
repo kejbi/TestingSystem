@@ -1,6 +1,7 @@
 package pl.prozprojekt.testingsystem.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import pl.prozprojekt.testingsystem.entities.StudentGroup;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/groups")
+@Secured("ROLE_TEACHER")
 public class GroupController {
     private GroupService groupService;
 
