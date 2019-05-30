@@ -12,6 +12,7 @@ public class QuizMapper implements Mapper<Quiz, QuizView>{
      QuizView quizView = new QuizView();
      quizView.setId(quiz.getId());
      quizView.setName(quiz.getName());
+     quizView.setNumberOfQuestions(quiz.getQuestions().size());
      return quizView;
  }
 

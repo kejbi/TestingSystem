@@ -9,6 +9,16 @@ public class QuizView {
     @NotNull
     private String name;
 
+    private int numberOfQuestions;
+
+    public int getNumberOfQuestions() {
+        return numberOfQuestions;
+    }
+
+    public void setNumberOfQuestions(int numberOfQuestions) {
+        this.numberOfQuestions = numberOfQuestions;
+    }
+
     public Long getId() {
         return id;
     }
