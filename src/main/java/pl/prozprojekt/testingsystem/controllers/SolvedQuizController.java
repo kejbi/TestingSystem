@@ -13,6 +13,7 @@ import pl.prozprojekt.testingsystem.entities.Student;
 import pl.prozprojekt.testingsystem.mappers.SolvedQuizMapper;
 import pl.prozprojekt.testingsystem.payload.QuizSolveRequest;
 import pl.prozprojekt.testingsystem.services.QuizService;
+import pl.prozprojekt.testingsystem.services.QuizSolver;
 import pl.prozprojekt.testingsystem.services.SolvedQuizService;
 import pl.prozprojekt.testingsystem.services.StudentService;
 import pl.prozprojekt.testingsystem.views.SolvedQuizView;
@@ -29,16 +30,14 @@ import java.util.stream.Collectors;
 public class SolvedQuizController {
     private SolvedQuizService solvedService;
     private SolvedQuizMapper solvedMapper;
-    private QuizService quizService;
-    private StudentService studentService;
+    private QuizSolver quizSolver;
 
     @Autowired
-    public SolvedQuizController(SolvedQuizService solvedService, SolvedQuizMapper solvedMapper, QuizService quizService, StudentService studentService)
+    public SolvedQuizController(SolvedQuizService solvedService, SolvedQuizMapper solvedMapper, QuizSolver quizSolver)
     {
         this.solvedService = solvedService;
         this.solvedMapper = solvedMapper;
-        this.quizService = quizService;
-        this.studentService = studentService;
+        this.quizSolver = quizSolver;
     }
 
     @GetMapping("/{id}")
@@ -68,31 +67,8 @@ public class SolvedQuizController {
             throw new ValidationException();
         }
 
-        List<Integer> answers = quizSolveRequest.getAnswers();
-        String ans = "";
-        int all = 0;
-        int score = 0;
-        Long id = quizSolveRequest.getQuizId();
+        SolvedQuiz solved = quizSolver.solveQuiz(quizSolveRequest);
 
-        Quiz quiz = quizService.getQuizById(id).orElseThrow(EntityNotFoundException::new);
-        Student student = studentService.getStudentById(quizSolveRequest.getStudentId()).orElseThrow(EntityNotFoundException::new);
-
-        for(Question q: quiz.getQuestions()){
-            if(answers.get(all) == q.getCorrect()) {
-                score += 1;
-            }
-            ans += answers.get(all);
-            all += 1;
-
-        }
-
-        SolvedQuiz solved = new SolvedQuiz();
-        solved.setAnswers(ans);
-        solved.setScore(score);
-        solved.setQuiz(quiz);
-        solved.setStudent(student);
-        solved.setPercent((100*score)/all);
-       ;
         return solvedMapper.convertToView(solvedService.addSolved(solved));
     }
 
