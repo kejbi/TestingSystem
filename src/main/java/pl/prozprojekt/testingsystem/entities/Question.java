@@ -15,9 +15,6 @@ public class Question {
     @ManyToMany(mappedBy = "questions", cascade = {CascadeType.MERGE})
     private List<Quiz> quizzes;
 
-    //@OneToMany(fetch = FetchType.EAGER)
-    //private List<Answer> answers;
-    //private List<String> answers;
     private String ans1;
     private String ans2;
     private String ans3;
@@ -88,20 +85,5 @@ public class Question {
     public void setQuizzes(List<Quiz> quizzes) {
         this.quizzes = quizzes;
     }
-
-    /*public List<String> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(List<String> answers) {
-        this.answers = answers;
-    }*/
-
-        /*public List<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
-    }*/
+    
 }
