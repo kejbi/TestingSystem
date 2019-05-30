@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/groups")
-@Secured("ROLE_TEACHER")
+@Secured({"ROLE_TEACHER", "ROLE_STUDENT"})
 public class GroupController {
     private GroupService groupService;
 
