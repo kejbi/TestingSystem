@@ -31,7 +31,7 @@ public class SolvedQuizService {
         return solvedRepo.getSolvedQuizsByQuizId(id);
     }
 
-    public void addSolved(SolvedQuiz quiz){ solvedRepo.save(quiz); }
+    public SolvedQuiz addSolved(SolvedQuiz quiz){ return solvedRepo.save(quiz); }
 
     public void deleteSolvedById(Long id){ solvedRepo.deleteById(id); }
 }

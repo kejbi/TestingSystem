@@ -30,7 +30,7 @@ public class QuizService {
         return quizRepo.getQuizzesByTeacherId(id);
     }
 
-    public void addQuiz(Quiz quiz){ quizRepo.save(quiz); }
+    public Quiz addQuiz(Quiz quiz){ quizRepo.save(quiz); }
 
     public void deleteQuizById(Long id){ quizRepo.deleteById(id); }
 }

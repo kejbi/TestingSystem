@@ -70,7 +70,7 @@ public class QuizController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addQuiz(@RequestBody @Valid QuizCreateRequest quizCreateRequest, BindingResult bidingResult){
+    public QuizView addQuiz(@RequestBody @Valid QuizCreateRequest quizCreateRequest, BindingResult bidingResult){
         if(bidingResult.hasErrors()){
             throw new ValidationException(bidingResult.toString());
         }
@@ -80,8 +80,8 @@ public class QuizController {
         quiz.setTeacher(teacherService.getTeacherById(quizCreateRequest.getTeacherId()).get());
         List<Question> questionList = questionService.getAllQuestionsByIdIn(quizCreateRequest.getQuestions());
         quiz.setQuestions(questionList);
-        quizService.addQuiz(quiz);
-        return ResponseEntity.ok("");
+
+        return quizMapper.convertToView(quizService.addQuiz(quiz));
     }
 
     @DeleteMapping("/{id}")

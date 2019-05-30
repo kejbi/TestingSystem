@@ -63,7 +63,7 @@ public class SolvedQuizController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addSolved(@RequestBody @Valid QuizSolveRequest quizSolveRequest, BindingResult bidingResult){
+    public SolvedQuizView addSolved(@RequestBody @Valid QuizSolveRequest quizSolveRequest, BindingResult bidingResult){
         if(bidingResult.hasErrors()){
             throw new ValidationException();
         }
@@ -92,8 +92,8 @@ public class SolvedQuizController {
         solved.setQuiz(quiz);
         solved.setStudent(student);
         solved.setPercent((100*score)/all);
-        solvedService.addSolved(solved);
-        return ResponseEntity.ok("Success");
+       ;
+        return solvedMapper.convertToView(solvedService.addSolved(solved));
     }
 
     @DeleteMapping("/{id}")
