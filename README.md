@@ -4,8 +4,8 @@ App allows to create quizzes and share them to students. Teachers can add questi
 
 In the future:
 
--disable multiple attempts to the test
--detailed results
--registration
+- disable multiple attempts to the test
+- detailed results
+- registration
 
 GUI for this system: https://github.com/kejbi/Testing-System-React
